@@ -30,6 +30,8 @@ int rune_isspace(Rune r);
 int rune_width(Rune r);
 
 /* internal */
+struct rune_range { Rune first, last; };
+int rune_is_in(struct rune_range *table, int start, int end, Rune r);
 int log2u32(uint32_t r);
-
+#define nelem(a) sizeof(a)/sizeof(*a)
 #endif

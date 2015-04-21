@@ -1,5 +1,4 @@
 #include <rune.h>
-struct rune_range { Rune first, last; };
 static struct rune_range two_width[] = {
 	{ 0x1100,  0x115f},
 	{ 0x2329,  0x232a},
@@ -190,22 +189,6 @@ static struct rune_range zero_width[] = {
 	{0x1d242, 0x1d244},
 	{0x1e8d0, 0x1e8d6},
 };
-
-static int rune_is_in(struct rune_range *table, int start, int end, Rune r){
-	int middle = (start + end)/2;
-	if(table[middle].first <= r && r <= table[middle].last)
-		return 1;
-	if(start == end)
-		return 0;
-	
-	if(r > table[middle].last)
-		return rune_is_in(table, middle+1, end, r);
-	if(r < table[middle].first)
-		return rune_is_in(table, start, middle-1, r);
-	return 0; /* we shouldn't get here */
-}
-
-#define nelem(a) sizeof(a)/sizeof(*a)
 
 int rune_width(Rune r){
 	if(rune_is_in(zero_width, 0, nelem(zero_width)-1, r))
