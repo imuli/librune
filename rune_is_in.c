@@ -3,7 +3,7 @@ int rune_is_in(struct rune_range *table, int start, int end, Rune r){
 	int middle = (start + end)/2;
 	if(table[middle].first <= r && r <= table[middle].last)
 		return 1;
-	if(start == end)
+	if(start >= end)
 		return 0;
 	
 	if(r > table[middle].last)
