@@ -26,12 +26,12 @@ int utf8_of_rune(char* u, Rune r);
 int utf8_of_runes(char* u, Runes* r);
 
 /* information */
-int rune_isspace(Rune r);
+int is_rune_space(Rune r);
 int rune_width(Rune r);
 
 /* internal */
 struct rune_range { Rune first, last; };
-int rune_is_in(struct rune_range *table, int start, int end, Rune r);
+int is_rune_in(struct rune_range *table, int start, int end, Rune r);
 int log2u32(uint32_t r);
 #define nelem(a) sizeof(a)/sizeof(*a)
 #endif

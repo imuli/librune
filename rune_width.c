@@ -191,9 +191,9 @@ static struct rune_range zero_width[] = {
 };
 
 int rune_width(Rune r){
-	if(rune_is_in(zero_width, 0, nelem(zero_width)-1, r))
+	if(is_rune_in(zero_width, 0, nelem(zero_width)-1, r))
 		return 0;
-	if(rune_is_in(two_width, 0, nelem(two_width)-1, r))
+	if(is_rune_in(two_width, 0, nelem(two_width)-1, r))
 		return 2;
 	return 1;
 }
