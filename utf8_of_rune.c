@@ -1,7 +1,7 @@
 #include <rune.h>
-int utf8_rune(char *u, Rune r){
+int utf8_of_rune(char *u, Rune r){
 	unsigned long mask;
-	int n = runechar(r);
+	int n = rune_bytes(r);
 	int i;
 	mask = n==1 ? 0 : 0xff00 >> n;
 	u[n] = '\0';

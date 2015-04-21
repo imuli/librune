@@ -1,35 +1,35 @@
 #ifndef RUNE_H
 #define RUNE_H
-#include <limits.h>
-#if LONG_BIT == 32
-typedef unsigned long Rune;
-#else
-typedef unsigned int Rune;
-#endif
+#include <stdint.h>
+typedef uint32_t Rune;
 typedef struct {
-	Rune c;
+	uint32_t c;
 	Rune r[];
 } Runes;
-#define RUNE_MAX 0xffffffff
-#define UTF8_MAX 7
 enum {
+	RUNE_MAX = 0xffffffff,
+	UTF8_MAX = 7,
 	IncRune = 0xfffe,
 	BadRune = 0xffff,
 };
 
-int runechar(Rune r);
-int utf8char(char *u);
-int rune_utf8(Rune *rr, char *u);
-int utf8_rune(char *u, Rune r);
+/* sizes and lengths */
+int rune_bytes(Rune r);
+int rune_n_bytes(Rune* r, int len);
+int utf8_size(char* u);
+int utf8_runes(char* u);
 
-int runeschars(Runes *r);
-int utf8srunes(char *u);
-int runes_utf8s(Runes *r, char *u);
-int utf8s_runes(char *u, Runes *r);
+/* conversions */
+int rune_of_utf8(Rune* rr, char* u);
+int runes_of_utf8(Rune* r, char* u);
+int utf8_of_rune(char* u, Rune r);
+int utf8_of_runes(char* u, Runes* r);
 
+/* information */
 int rune_isspace(Rune r);
 int rune_width(Rune r);
 
-int log2rune(Rune r);
+/* internal */
+int log2u32(uint32_t r);
 
 #endif

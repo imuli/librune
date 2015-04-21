@@ -1,7 +1,7 @@
 #include <rune.h>
-int rune_utf8(Rune *rr, char *u){
+int rune_of_utf8(Rune *rr, char *u){
 	unsigned long mask;
-	int n = utf8char(u);
+	int n = utf8_size(u);
 	int i;
 	Rune r;
 	/* check for spurious 10xxxxxx bytes */
@@ -21,7 +21,7 @@ int rune_utf8(Rune *rr, char *u){
 		r |= u[i] & 0x3f;
 	}
 	/* enforce minimum length utf8 encoding */
-	if(i != runechar(r))
+	if(i != rune_bytes(r))
 		r = BadRune;
 	*rr = r;
 	return i;
