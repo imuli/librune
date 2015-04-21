@@ -12,6 +12,6 @@ static struct rune_range space[] = { /* $3 ~ /^Zs$/ ∪ $5 ! /^(B|S|WS)$/ */
 	{ 0x205f,  0x205f},	/* MEDIUM MATHEMATICAL SPACE */
 	{ 0x3000,  0x3000},	/* IDEOGRAPHIC SPACE */
 };
-int rune_isspace(Rune r){
+int is_rune_space(Rune r){
 	return is_rune_in(space, 0, nelem(space)-1, r);
 }
